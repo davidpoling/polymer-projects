@@ -1,0 +1,46 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/paper-button/paper-button.html">
+<link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+
+<!--
+`first-element`
+This is the first Polymer element I've created on this machine.
+
+@demo demo/index.html 
+-->
+
+<dom-module id="first-element">
+  <template>
+    <style include="iron-flex">
+      :host {
+        display: block;
+      }
+    </style>
+      <div id="buttonTitleContainer" class="vertical center center layout">
+          <div class="title-text" hidden$="{{!textHidden}}">{{titleText}}</div>
+          <paper-button id="button" on-click="_handleOnClick" raised>Click Here!</paper-button>
+      </div>
+  </template>
+
+  <script>
+    Polymer({
+
+        is: 'first-element',
+
+        properties: {
+            textHidden: {
+                type: Boolean,
+                value: false
+            },
+            titleText: {
+                type: String,
+                value: "BOO!"
+            }
+        },
+
+        _handleOnClick: function () {
+            this.textHidden = !this.textHidden;
+        }
+    });
+  </script>
+</dom-module>
