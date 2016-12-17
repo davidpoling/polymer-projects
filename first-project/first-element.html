@@ -1,6 +1,7 @@
 <link rel="import" href="bower_components/polymer/polymer.html">
 <link rel="import" href="bower_components/paper-button/paper-button.html">
 <link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="bower_components/vaadin-grid/vaadin-grid.html">
 
 <!--
 `first-element`
@@ -17,9 +18,19 @@ This is the first Polymer element I've created on this machine.
         display: block;
       }
     </style>
-      <div id="buttonTitleContainer" class="vertical center center layout">
-          <div class="title-text" hidden$="{{!textHidden}}">{{titleText}}</div>
-          <paper-button id="button" on-click="_handleOnClick" raised>Click Here!</paper-button>
+      <div class="layout vertical">
+          <div id="buttonTitleContainer" class="vertical center center layout">
+              <div class="title-text" hidden$="{{!textHidden}}">{{titleText}}</div>
+              <paper-button id="button" on-click="_handleOnClick" raised>Click Here!</paper-button>
+          </div>
+          <div id="gridContainer" hidden$="{{!gridHidden}}">
+              <vaadin-grid id="grid">
+                  <table>
+                      <col name="firstName" resizable>
+                      <col name="lastName" resizable>
+                  </table>
+              </vaadin-grid>
+          </div>
       </div>
   </template>
 
@@ -37,6 +48,17 @@ This is the first Polymer element I've created on this machine.
              * @type Boolean
              */
             textHidden: {
+                type: Boolean,
+                value: false
+            },
+
+            /**
+             * Boolean specifying whether the grid should be hidden or not
+             *
+             * @attribute gridHidden
+             * @type Boolean
+             */
+            gridHidden: {
                 type: Boolean,
                 value: false
             },
@@ -60,6 +82,13 @@ This is the first Polymer element I've created on this machine.
          */
         _handleOnClick: function () {
             this.textHidden = !this.textHidden;
+            this.gridHidden = !this.gridHidden;
+        },
+
+        ready: function () {
+            this.$.grid.items = [
+                {"firstName": "Dave", "lastName": "Poling"}
+            ];
         }
     });
   </script>
