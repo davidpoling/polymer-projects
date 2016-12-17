@@ -3,7 +3,9 @@
   "description": "This is the first Polymer element I&#39;ve created on this machine.",
   "main": "first-element.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.4.0"
+    "polymer": "Polymer/polymer#^1.4.0",
+    "vaadin-core-elements": "^1.3.0",
+    "vaadin-grid": "master"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
