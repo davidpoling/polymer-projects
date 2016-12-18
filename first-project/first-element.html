@@ -30,6 +30,12 @@ This is the first Polymer element I've created on this machine.
         #gridContainer {
             width: 100%;
             top: 50px;
+            margin-bottom: 40px;
+        }
+
+        #imageContainer {
+            width: calc(100% - 30px);
+            overflow: hidden;
         }
     </style>
       <div id="container" class="vertical center-center layout">
@@ -45,19 +51,8 @@ This is the first Polymer element I've created on this machine.
                   </table>
               </vaadin-grid>
           </div>
-          <div id="owlCar" class="owl-carousel owl-theme owl-nav" hidden$="{{!carouselHidden}}">
-              <div class="owl-item">
-                  <img src="images/aj-styles.jpg">
-              </div>
-              <div class="owl-item">
-                  <img src="images/kevin-owens.jpg">
-              </div>
-              <div class="owl-item">
-                  <img src="images/seth-rollins.jpg">
-              </div>
-              <div class="owl-item">
-                  <img src="images/john-cena.jpg">
-              </div>
+          <div id="imageContainer" hidden$="{{!imagesHidden}}" class="horizontal center-center layout">
+              <img src="{{selectedImage}}">
           </div>
       </div>
   </template>
@@ -81,12 +76,12 @@ This is the first Polymer element I've created on this machine.
             },
 
             /**
-             * Boolean specifying whether the image carousel should be hidden or not
+             * Boolean specifying whether the images should be hidden or not
              *
-             * @attribute carouselHidden
+             * @attribute imagesHidden
              * @type Boolean
              */
-            carouselHidden: {
+            imagesHidden: {
                 type: Boolean,
                 value: false
             },
@@ -103,13 +98,33 @@ This is the first Polymer element I've created on this machine.
             },
 
             /**
-             * The image carousel object
+             * Array of images to be used
              *
-             * @attribute owlCar
-             * @type Object
+             * @attribute images
+             * @type Array
              */
-            owlCar: {
-                type: Object
+            images: {
+                type: Array,
+                value: function () {
+                    return [
+                        "../images/aj-styles.jpg",
+                        "../images/kevin-owens.jpg",
+                        "../images/seth-rollins.jpg",
+                        "../images/john-cena.jpg"
+                    ];
+                }
+            },
+
+            /**
+             * The current selected image from the grid selection
+             *
+             * @attribute selectedImage
+             * @type String
+             */
+            selectedImage: {
+                type: String,
+                value: "../images/aj-styles.jpg",
+                notify: true
             }
         },
 
@@ -120,7 +135,7 @@ This is the first Polymer element I've created on this machine.
          */
         _handleOnClick: function () {
             this.gridHidden = !this.gridHidden;
-            this.carouselHidden = !this.carouselHidden;
+            this.imagesHidden = !this.imagesHidden;
 
             if (this.gridHidden == true) {
                 this.set("titleText", "Hide");
@@ -134,10 +149,22 @@ This is the first Polymer element I've created on this machine.
          * Method to handle the selected grid item
          *
          * @method _handleSelectedItem
-         * @param {Event} e, the selected item event
          */
-        _handleSelectedItem: function (e) {
-            console.log(this.$.grid.selection.selected());
+        _handleSelectedItem: function () {
+            var selected = this.$.grid.selection.selected();
+
+            if (selected[0] == 0) {
+                this.set("selectedImage", this.images[0]);
+            }
+            else if (selected[0] == 1) {
+                this.set("selectedImage", this.images[1]);
+            }
+            else if (selected[0] == 2) {
+                this.set("selectedImage", this.images[2]);
+            }
+            else if (selected[0] == 3) {
+                this.set("selectedImage", this.images[3]);
+            }
         },
 
         ready: function () {
@@ -147,14 +174,6 @@ This is the first Polymer element I've created on this machine.
                 {"firstName": "Seth", "lastName": "Rollins"},
                 {"firstName": "John", "lastName": "Cena"}
             ];
-
-            this.owlCar = $(this.$.owlCar);
-            $(this.owlCar).owlCarousel({
-                items: 4,
-                autoPlay: true,
-                autoHeight: true,
-                navigation: true
-            });
         },
 
         attached: function () {
