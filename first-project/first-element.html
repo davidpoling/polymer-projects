@@ -14,13 +14,27 @@ This is the first Polymer element I've created on this machine.
 <dom-module id="first-element">
   <template>
     <style include="iron-flex">
-      :host {
-        display: block;
-      }
+        :host {
+            display: block;
+        }
+
+        #container {
+            width: 100%;
+            top: 200px;
+        }
+
+        #buttonTitleContainer {
+            margin-bottom: 40px;
+        }
+
+        #gridContainer {
+            width: 100%;
+            top: 50px;
+        }
     </style>
-      <div class="layout vertical">
+      <div id="container" class="vertical center-center layout">
           <div id="buttonTitleContainer" class="vertical center center layout">
-              <div class="title-text" hidden$="{{!textHidden}}">{{titleText}}</div>
+              <div class="title-text">{{titleText}}</div>
               <paper-button id="button" on-click="_handleOnClick" raised>Click Here!</paper-button>
           </div>
           <div id="gridContainer" hidden$="{{!gridHidden}}">
@@ -42,17 +56,6 @@ This is the first Polymer element I've created on this machine.
         properties: {
 
             /**
-             * Boolean specifying whether the text should be hidden or not
-             *
-             * @attribute textHidden
-             * @type Boolean
-             */
-            textHidden: {
-                type: Boolean,
-                value: false
-            },
-
-            /**
              * Boolean specifying whether the grid should be hidden or not
              *
              * @attribute gridHidden
@@ -71,24 +74,51 @@ This is the first Polymer element I've created on this machine.
              */
             titleText: {
                 type: String,
-                value: "BOO!"
+                value: "Show"
             }
         },
 
         /**
-         * Method to show/hide the title text when the button is clicked
+         * Method to show/hide the title text and grid when the button is clicked
          *
          * @method _handleOnClick
          */
         _handleOnClick: function () {
-            this.textHidden = !this.textHidden;
             this.gridHidden = !this.gridHidden;
+
+            if (this.gridHidden == true) {
+                this.set("titleText", "Hide");
+            }
+            else {
+                this.set("titleText", "Show");
+            }
+        },
+
+        /**
+         * Method to handle the selected grid item
+         *
+         * @method _handleSelectedItem
+         * @param {Event} e, the selected item event
+         */
+        _handleSelectedItem: function (e) {
+            console.log(this.$.grid.selection.selected());
         },
 
         ready: function () {
             this.$.grid.items = [
-                {"firstName": "Dave", "lastName": "Poling"}
+                {"firstName": "AJ", "lastName": "Styles"},
+                {"firstName": "Kevin", "lastName": "Owens"},
+                {"firstName": "Seth", "lastName": "Rollins"},
+                {"firstName": "John", "lastName": "Cena"}
             ];
+        },
+
+        attached: function () {
+            this.listen(this.$.grid, 'selected-items-changed', '_handleSelectedItem');
+        },
+
+        detached: function () {
+            this.unlisten(this.$.grid, 'selected-items-changed', '_handleSelectedItem');
         }
     });
   </script>
