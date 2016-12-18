@@ -45,6 +45,20 @@ This is the first Polymer element I've created on this machine.
                   </table>
               </vaadin-grid>
           </div>
+          <div id="owlCar" class="owl-carousel owl-theme owl-nav" hidden$="{{!carouselHidden}}">
+              <div class="owl-item">
+                  <img src="images/aj-styles.jpg">
+              </div>
+              <div class="owl-item">
+                  <img src="images/kevin-owens.jpg">
+              </div>
+              <div class="owl-item">
+                  <img src="images/seth-rollins.jpg">
+              </div>
+              <div class="owl-item">
+                  <img src="images/john-cena.jpg">
+              </div>
+          </div>
       </div>
   </template>
 
@@ -67,6 +81,17 @@ This is the first Polymer element I've created on this machine.
             },
 
             /**
+             * Boolean specifying whether the image carousel should be hidden or not
+             *
+             * @attribute carouselHidden
+             * @type Boolean
+             */
+            carouselHidden: {
+                type: Boolean,
+                value: false
+            },
+
+            /**
              * Text shown for the title display
              *
              * @attribute titleText
@@ -75,6 +100,16 @@ This is the first Polymer element I've created on this machine.
             titleText: {
                 type: String,
                 value: "Show"
+            },
+
+            /**
+             * The image carousel object
+             *
+             * @attribute owlCar
+             * @type Object
+             */
+            owlCar: {
+                type: Object
             }
         },
 
@@ -85,6 +120,7 @@ This is the first Polymer element I've created on this machine.
          */
         _handleOnClick: function () {
             this.gridHidden = !this.gridHidden;
+            this.carouselHidden = !this.carouselHidden;
 
             if (this.gridHidden == true) {
                 this.set("titleText", "Hide");
@@ -111,6 +147,14 @@ This is the first Polymer element I've created on this machine.
                 {"firstName": "Seth", "lastName": "Rollins"},
                 {"firstName": "John", "lastName": "Cena"}
             ];
+
+            this.owlCar = $(this.$.owlCar);
+            $(this.owlCar).owlCarousel({
+                items: 4,
+                autoPlay: true,
+                autoHeight: true,
+                navigation: true
+            });
         },
 
         attached: function () {
