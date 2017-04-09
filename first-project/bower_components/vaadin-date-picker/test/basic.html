@@ -256,6 +256,18 @@
         expect(datepicker.$.dropdown.noAutoFocus).to.equal(true);
       });
 
+      it('should realign on iron-resize', function(done) {
+        open(datepicker, function() {
+          sinon.stub(datepicker, '_updateAlignmentAndPosition', function() {
+            if (!done._called) {
+              done._called = true;
+              done();
+            }
+          });
+          datepicker.fire('iron-resize', undefined, {bubbles: false});
+        });
+      });
+
       describe('window scroll realign', function() {
 
         beforeEach(function(done) {
@@ -291,14 +303,16 @@
           });
         });
 
-        it('should not realign on year/month scroll', function(done) {
-          var spy = sinon.spy(datepicker, '_updateAlignmentAndPosition');
-          datepicker.$.overlay.$.yearScroller.$.scroller.scrollTop += 100;
-          datepicker.async(function() {
-            expect(spy.called).to.be.false;
-            done();
-          }, 1);
-        });
+        if (!ios) { // https://github.com/vaadin/vaadin-date-picker/issues/330
+          it('should not realign on year/month scroll', function(done) {
+            var spy = sinon.spy(datepicker, '_updateAlignmentAndPosition');
+            datepicker.$.overlay.$.yearScroller.$.scroller.scrollTop += 100;
+            datepicker.async(function() {
+              expect(spy.called).to.be.false;
+              done();
+            }, 1);
+          });
+        }
 
         it('should not realign once closed', function(done) {
           datepicker.addEventListener('iron-overlay-closed', function() {

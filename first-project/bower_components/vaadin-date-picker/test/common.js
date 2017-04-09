@@ -56,7 +56,7 @@ function monthsEqual(date1, date2) {
 
 function getFirstVisibleItem(scroller, bufferOffset) {
   var children = [];
-  bufferOffset = (bufferOffset ||  0);
+  bufferOffset = (bufferOffset || 0);
 
   scroller._buffers.forEach(function(buffer) {
     [].forEach.call(buffer.children, function(itemWrapper) {
@@ -88,7 +88,7 @@ function waitUntilScrolledTo(overlay, date, callback) {
   }
   var monthIndex = overlay._differenceInMonths(date, new Date());
   if (overlay.$.scroller.position === monthIndex) {
-    callback();
+    Polymer.RenderStatus.afterNextRender(overlay, callback);
   } else {
     setTimeout(waitUntilScrolledTo, 10, overlay, date, callback);
   }

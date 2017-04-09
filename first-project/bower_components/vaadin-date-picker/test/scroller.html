@@ -23,7 +23,7 @@
     describe('vaadin-infinite-scroller', function() {
       var scroller;
 
-      before(function(done) {
+      beforeEach(function(done) {
         scroller = document.querySelector('#scroller');
 
         Polymer.RenderStatus.afterNextRender(scroller, function() {
@@ -33,13 +33,9 @@
         scroller.active = true;
       });
 
-      afterEach(function(done) {
-        Polymer.Base.async(done, 1000);
-      });
-
       function verifyPosition() {
         var item = getFirstVisibleItem(scroller);
-        expect(Math.abs(parseInt(item.textContent) - scroller.position)).to.be.below(1);
+        expect(item.textContent - scroller.position).to.be.below(1);
 
         var scrollDiff = item.getBoundingClientRect().top - scroller.getBoundingClientRect().top;
         var ratio = scrollDiff / scroller.itemHeight;
@@ -66,7 +62,7 @@
             done();
           } else {
             scroller.$.scroller.scrollTop += scroller.itemHeight * 3.7;
-            scroller.async(scrollDown, 20);
+            scroller.async(scrollDown, 30);
           }
         }
 
@@ -80,7 +76,7 @@
             done();
           } else {
             scroller.$.scroller.scrollTop -= scroller.itemHeight * 3.7;
-            scroller.async(scrollUp, 20);
+            scroller.async(scrollUp, 30);
           }
         }
 
@@ -95,17 +91,22 @@
         }
       });
 
-      it('should fire scroll events', function(done) {
-        scroller.addEventListener('scroll', function() {
+      it('should fire non-bubbling custom-scroll events', function(done) {
+        function customScrollListener(e) {
+          scroller.removeEventListener('custom-scroll', customScrollListener);
+          expect(e.bubbles).to.be.false;
           done();
-        });
+        }
+
+        scroller.addEventListener('custom-scroll', customScrollListener);
+
         scroller.$.scroller.scrollTop += 10;
       });
 
-      it('should not fire scroll events', function(done) {
+      it('should not fire custom-scroll events', function(done) {
         var spy = sinon.spy();
-        scroller.addEventListener('scroll', spy);
-        scroller.$.scroller.addEventListener('scroll', function() {
+        scroller.addEventListener('custom-scroll', spy);
+        listenForEvent(scroller.$.scroller, 'scroll', function() {
           expect(spy.called).to.be.false;
           done();
         });
@@ -122,14 +123,13 @@
           expect(spy.called).to.be.false;
           done();
         });
-
       });
 
       it('should have an instance stamped to every wrapper', function(done) {
-        scroller._buffers.forEach(function(buffer, bufferIndex) {
-          [].forEach.call(buffer.children, function(itemWrapper, index) {
+        scroller._buffers.forEach(function(buffer) {
+          [].forEach.call(buffer.children, function(itemWrapper) {
             expect(itemWrapper.firstElementChild).to.be.ok;
-          }.bind(this));
+          });
         }, this);
         done();
       });

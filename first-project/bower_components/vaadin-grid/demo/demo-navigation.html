@@ -12,6 +12,7 @@
     nav > ul {
       padding: 0;
       display: flex;
+      flex-wrap: wrap;
     }
     nav > ul > li {
       padding: 0 24px 8px 0;
@@ -38,8 +39,6 @@
           <template is="dom-if" if="[[!_current(item)]]">
             <li><a href="[[item.name]].html">[[_title(item)]]</a></li>
           </template>
-        </template>
-        <template is="dom-if" if="">
         </template>
       </ul>
     </nav>

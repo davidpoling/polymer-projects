@@ -1,8 +1,20 @@
-![Bower version](https://img.shields.io/bower/v/vaadin-core-elements.svg) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/vaadin/vaadin-core-elements?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+![Bower version](https://badge.fury.io/bo/vaadin-core-elements.svg)
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/collection/vaadin/vaadin-core-elements)
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/vaadin/vaadin-core-elements?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 # Vaadin Core Elements
 
-[Vaadin elements](https://vaadin.com/elements) are an evolving set of open sourced custom HTML elements, which seamlessly extend the [Polymer Element Catalog](https://elements.polymer-project.org) with high-quality user interface components commonly needed in modern mobile and desktop business web applications.
+[Vaadin elements](https://vaadin.com/elements) are an evolving set of open sourced custom HTML elements, which seamlessly extend the [Polymer Element Catalog](https://elements.polymer-project.org) with high-quality user interface components commonly needed in modern mobile and desktop business web applications. The following elements are included:
+
+| Element | Bower Version | Npm version | Build Status |
+|---------|---------------|-------------|--------------|
+| [vaadin-combo-box](https://github.com/vaadin/vaadin-combo-box) | ![Bower version](https://badge.fury.io/bo/vaadin-combo-box.svg) | [![npm version](https://badge.fury.io/js/vaadin-combo-box.svg)](https://www.npmjs.com/package/vaadin-combo-box) | [![Build Status](https://travis-ci.org/vaadin/vaadin-combo-box.svg?branch=master)](https://travis-ci.org/vaadin/vaadin-combo-box) |
+| [vaadin-context-menu](https://github.com/vaadin/vaadin-context-menu) | ![Bower version](https://badge.fury.io/bo/vaadin-context-menu.svg) | [![npm version](https://badge.fury.io/js/vaadin-context-menu.svg)](https://www.npmjs.com/package/vaadin-context-menu) | [![Build Status](https://travis-ci.org/vaadin/vaadin-context-menu.svg?branch=master)](https://travis-ci.org/vaadin/vaadin-context-menu) |
+| [vaadin-date-picker](https://github.com/vaadin/vaadin-date-picker) | ![Bower version](https://badge.fury.io/bo/vaadin-date-picker.svg) | [![npm version](https://badge.fury.io/js/vaadin-date-picker.svg)](https://www.npmjs.com/package/vaadin-date-picker) | [![Build Status](https://travis-ci.org/vaadin/vaadin-date-picker.svg?branch=master)](https://travis-ci.org/vaadin/vaadin-date-picker) |
+| [vaadin-grid](https://github.com/vaadin/vaadin-grid) | ![Bower version](https://badge.fury.io/bo/vaadin-grid.svg) | [![npm version](https://badge.fury.io/js/vaadin-grid.svg)](https://www.npmjs.com/package/vaadin-grid) | [![Build Status](https://travis-ci.org/vaadin/vaadin-grid.svg?branch=2.0-dev)](https://travis-ci.org/vaadin/vaadin-grid) |
+| [vaadin-icons](https://github.com/vaadin/vaadin-icons) | ![Bower version](https://badge.fury.io/bo/vaadin-icons.svg) | [![npm version](https://badge.fury.io/js/vaadin-icons.svg)](https://www.npmjs.com/package/vaadin-icons) | |
+| [vaadin-split-layout](https://github.com/vaadin/vaadin-split-layout) | ![Bower version](https://badge.fury.io/bo/vaadin-split-layout.svg) | [![npm version](https://badge.fury.io/js/vaadin-split-layout.svg)](https://www.npmjs.com/package/vaadin-split-layout) | [![Build status](https://travis-ci.org/vaadin/vaadin-split-layout.svg?branch=master)](https://travis-ci.org/vaadin/vaadin-split-layout) |
+| [vaadin-upload](https://github.com/vaadin/vaadin-upload) | ![Bower version](https://badge.fury.io/bo/vaadin-upload.svg) | [![npm version](https://badge.fury.io/js/vaadin-upload.svg)](https://www.npmjs.com/package/vaadin-upload) | [![Build Status](https://travis-ci.org/vaadin/vaadin-upload.svg?branch=master)](https://travis-ci.org/vaadin/vaadin-upload) |
 
 Vaadin Core Elements is a bundle that contains all the free elements, licensed under the Apache License 2.0. In addition, we have commercially licensed elements, such as [Vaadin Charts](https://github.com/vaadin/vaadin-charts).
 

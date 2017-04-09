@@ -49,7 +49,7 @@
         @apply(--vaadin-date-picker-calendar-date-cell);
       }
 
-      #monthGrid div:not(:empty):not([disabled]):active {
+      #monthGrid div:not(:empty):not([disabled]):not(.weekday):not(.weeknumber):active {
         background: var(--light-primary-color);
         border-radius: 2px;
       }
@@ -264,7 +264,7 @@
         return this._dateEquals(new Date(), date);
       },
 
-      _getDays: function(month, firstDayOfWeek, minDate, maxDate) {
+      _getDays: function(month, firstDayOfWeek) {
         // First day of the month (at midnight).
         var date = new Date(0, 0);
         date.setFullYear(month.getFullYear());
@@ -291,7 +291,9 @@
       _getWeekNumber: function(date, days) {
         if (!date) {
           // Get the first non-null date from the days array.
-          date = days.reduce(function(acc, d) { return (!acc && d ? d : acc); });
+          date = days.reduce(function(acc, d) {
+            return (!acc && d ? d : acc);
+          });
         }
 
         return vaadin.elements.datepicker.DatePickerHelper._getISOWeekNumber(date);
